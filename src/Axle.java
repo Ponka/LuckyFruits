@@ -13,16 +13,36 @@ public class Axle {
 			reels[x] = new Reel();
 		}
 		blocked = new boolean[AXLE_SIZE];
+		for(int x = 0 ; x < blocked.length ; x++){
+			blocked[x] = false;
+		}
 	}
 	
 	public Fruit[] spin(){
 		Fruit ret[] = new Fruit[AXLE_SIZE];
 		for(int x = 0 ; x < AXLE_SIZE ; x++){
-			ret[x] = reels[x].spin();
+			if(!blocked[x]){
+				ret[x] = reels[x].spin();
+			}else{
+				ret[x] = reels[x].getCurrent();
+			}
 		}
 		return ret;
 	}
 	
+	public void unblockAll(){
+		for(int x = 0 ; x < blocked.length ; x++){
+			blocked[x] = false;
+		}
+	}
+	
+	public void setBlocked(int id, boolean b){
+		blocked[id] = b;
+	}
+	
+	public void toggleBlocked(int r){
+		blocked[r] = !blocked[r];
+	}
 	
 	
 	/**
@@ -35,6 +55,27 @@ public class Axle {
 			System.out.printf("%3d|",f[x].id);
 		}
 		System.out.println();
-	}
+		
+		
+		a.toggleBlocked(0);
+		f = a.spin();
+		for(int x = 0 ; x < f.length; x++){
+			System.out.printf("%3d|",f[x].id);
+		}
+		System.out.println();
+		
+		a.toggleBlocked(1);
+		f = a.spin();
+		for(int x = 0 ; x < f.length; x++){
+			System.out.printf("%3d|",f[x].id);
+		}
+		System.out.println();
 
+		a.unblockAll();
+		f = a.spin();
+		for(int x = 0 ; x < f.length; x++){
+			System.out.printf("%3d|",f[x].id);
+		}
+		System.out.println();
+	}
 }

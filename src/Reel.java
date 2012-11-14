@@ -2,24 +2,33 @@ import java.util.Random;
 
 public class Reel {
 
-	public static final int WHEEL_SIZE = 5;
+	public static final int REEL_SIZE = 5;
 	
 	Fruit fruits[] ;
-	
+	int current;
 	Random rand = null;
 	
 	Reel(){
-		fruits = new Fruit[WHEEL_SIZE];
+		fruits = new Fruit[REEL_SIZE];
 		for( int x = 0 ; x < fruits.length ; x++){
 			fruits[x] = new Fruit(x);
 		}
 
 		rand = new Random();
-		
+		randomizeCurrent();
+	}
+	
+	public Fruit getCurrent(){
+		return fruits[current];
+	}
+	
+	private void randomizeCurrent(){
+		current = rand.nextInt(REEL_SIZE);
 	}
 	
 	public Fruit spin(){
-		return fruits[rand.nextInt(WHEEL_SIZE)];
+		randomizeCurrent();
+		return getCurrent();
 	}
 	
 	
