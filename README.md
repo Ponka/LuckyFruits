@@ -1,4 +1,4 @@
 LuckyFruits
 ===========
 
-na
+TODO: write README file ;)
