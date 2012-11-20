@@ -12,12 +12,18 @@ public class Account {
 	
 	Account(){
 		money = new BigDecimal("0.00");
-		creditPrice = new BigDecimal("0.05");
+		creditPrice = new BigDecimal("0.50");
 	}
 	
 	public boolean buyCredit(){
 		if(!withdrawMoney(creditPrice))return false;
 		credits++;
+		return true;
+	}
+	
+	public boolean useCredit(){
+		if(credits <= 0)return false;
+		credits--;
 		return true;
 	}
 	
@@ -28,12 +34,17 @@ public class Account {
 		return true;
 	}
 	
+	public void depositMoney(int amount){
+		BigDecimal tmp  = new BigDecimal(amount);
+		money = money.add(tmp);
+	}
+	
 	public void depositMoney(BigDecimal amount){
 		money = money.add(amount);
 		
 	}
 	public String toString(){
-		return "Money: "+money+"\tCredits: "+credits;
+		return "   Money: "+money+"   Credits: "+credits;
 	}
 	
 	public static void main(String x[]){
