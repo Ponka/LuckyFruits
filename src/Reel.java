@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class Reel {
 
-	public static final int REEL_SIZE = 5;
+	public static final int REEL_SIZE = Fruit.FRUIT_MAX;
 	
 	Fruit fruits[] ;
 	int current;
